@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { signIn, signUp } from '../controllers/authController'
-import { validateSignInSchema, validateSignUpSchema } from '../validations/authSchemas'
+import { signIn, signUp } from '../controllers/authController.js'
+import { validateSignInSchema, validateSignUpSchema } from '../validations/authSchemas.js'
 
 const router = Router()
 

@@ -61,8 +61,4 @@ async function deleteCategory(req, res) {
     }
 }
 
-async function createBaseCategory(userId) {
-    await db.collection('categories').insertOne({ name: 'all', userId })
-}
-
-export { createCategory, updateCategory, getCategories, createBaseCategory, deleteCategory, getCategory }
+export { createCategory, updateCategory, getCategories, deleteCategory, getCategory }

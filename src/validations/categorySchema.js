@@ -6,7 +6,6 @@ async function validateCategorySchema(req, res, next) {
 
     const categorySchema = joi.object({
         name: joi.string().required(),
-        notesId: req.method === 'POST' ? joi.array().required() : joi.array()
     })
 
     const { error } = categorySchema.validate(req.body, { abortEarly: false })

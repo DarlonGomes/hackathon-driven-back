@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node ./src/index.js",
-		"dev": "npx nodemon ./src/index.js",
+    "dev": "npx nodemon ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -21,6 +21,7 @@
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.8.0",
+    "nodemon": "^2.0.19",
     "uuid": "^8.3.2"
   }
 }

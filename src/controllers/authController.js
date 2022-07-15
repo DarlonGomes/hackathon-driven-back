@@ -1,6 +1,10 @@
 import db from "../database/db.js"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken'
+import { createBaseCategory } from "./categoryController.js"
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 async function signUp(req, res) {
     const { name, email, password } = req.body
@@ -8,7 +12,8 @@ async function signUp(req, res) {
     try {
         const hashPassword = bcrypt.hashSync(password, 10)
 
-        await db.collection('users').insertOne({ name, email, password: hashPassword })
+        const user = await db.collection('users').insertOne({ name, email, password: hashPassword })
+        await createBaseCategory(user.insertedId.toString())
 
         res.sendStatus(201)
     } catch(err) {

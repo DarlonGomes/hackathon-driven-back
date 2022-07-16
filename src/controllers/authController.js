@@ -22,7 +22,6 @@ async function signUp(req, res) {
 
 async function signIn(req, res) {
     const { user } = res.locals
-
     try {
         if(bcrypt.compareSync(req.body.password, user.password)) {
             const token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: '7d' })

@@ -32,7 +32,7 @@ async function validateSignInSchema(req, res, next) {
         email: joi.string().email().required(),
         password: joi.string().required()
     })
-
+    
     const { error } = signInSchema.validate(req.body, { abortEarly: false })
 
     if(error) {
@@ -40,7 +40,7 @@ async function validateSignInSchema(req, res, next) {
     } 
 
     const emailFounded = await db.collection(process.env.MONGO_USERS).findOne({ email: req.body.email })
-
+    console.log(emailFounded)
     if(!emailFounded) {
         return res.status(404).send('email not founded')
     }

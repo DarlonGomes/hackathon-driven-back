@@ -1,6 +1,9 @@
 import joi from 'joi'
 import db from '../database/db.js'
 import { ObjectId } from 'mongodb';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 async function validateNoteSchema(req, res, next) {
     const { userId } = res.locals
@@ -19,7 +22,7 @@ async function validateNoteSchema(req, res, next) {
     }
 
     if(categoryId && categoryId !== '') {
-        const categoryFounded = await db.collection('categories').findOne({ _id: ObjectId(categoryId), userId })
+        const categoryFounded = await db.collection(process.env.MONGO_CATEGORIES).findOne({ _id: ObjectId(categoryId), userId })
     
         if(!categoryFounded) {
             return res.status(404).send('category not found')

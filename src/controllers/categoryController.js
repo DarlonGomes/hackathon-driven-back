@@ -1,11 +1,14 @@
 import db from "../database/db.js"
 import { ObjectId } from 'mongodb';
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 async function createCategory(req, res) {
     const { userId } = res.locals
 
     try {
-        await db.collection('categories').insertOne({ ...req.body, userId })
+        await db.collection(process.env.MONGO_CATEGORIES).insertOne({ ...req.body, userId })
 
         res.sendStatus(201)
     } catch (err) {
@@ -18,7 +21,7 @@ async function updateCategory(req, res) {
     const { categoryId } = req.params
 
     try {
-        await db.collection('categories').updateOne({ _id: ObjectId(categoryId) }, { $set: { name } })
+        await db.collection(process.env.MONGO_CATEGORIES).updateOne({ _id: ObjectId(categoryId) }, { $set: { name } })
 
         res.sendStatus(200)
     } catch (err) {
@@ -30,7 +33,7 @@ async function getCategories(req, res) {
     const { userId } = res.locals
 
     try {
-        const userCategories = await db.collection('categories').find({ userId }).toArray()
+        const userCategories = await db.collection(process.env.MONGO_CATEGORIES).find({ userId }).toArray()
 
         res.status(200).send(userCategories)
     } catch (err) {
@@ -43,7 +46,7 @@ async function getCategory(req, res) {
     const { categoryId } = req.params
 
     try {
-        const userCategory = await db.collection('categories').findOne({ _id: ObjectId(categoryId), userId })
+        const userCategory = await db.collection(process.env.MONGO_CATEGORIES).findOne({ _id: ObjectId(categoryId), userId })
 
         res.status(200).send(userCategory)
     } catch (err) {

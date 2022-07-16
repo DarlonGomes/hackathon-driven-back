@@ -9,9 +9,10 @@ async function signUp(req, res) {
     const { name, email, password } = req.body
 
     try {
+
         const hashPassword = bcrypt.hashSync(password, 10)
 
-        await db.collection('users').insertOne({ name, email, password: hashPassword })
+        await db.collection(process.env.MONGO_USERS).insertOne({ name, email, password: hashPassword })
 
         res.sendStatus(201)
     } catch(err) {

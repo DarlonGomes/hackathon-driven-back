@@ -26,7 +26,7 @@ async function signIn(req, res) {
         if(bcrypt.compareSync(req.body.password, user.password)) {
             const token = jwt.sign(user, process.env.SECRET_KEY, { expiresIn: '7d' })
 
-            res.status(200).send({ name: user.name, token })
+            res.status(200).send({ name: user.name , email: user.email, token })
         } else {
             res.status(403).send('wrong password')
         }

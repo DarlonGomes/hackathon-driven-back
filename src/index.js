@@ -6,7 +6,7 @@ import categoryRouter from './routes/categoryRouter.js'
 import notesRouter from './routes/notesRouter.js'
 
 dotenv.config();
-
+const PORT_IN_USE = process.env.PORT || 5000
 const server = express();
 
 server.use(cors());
@@ -15,7 +15,7 @@ server.use(express.json());
 server.use(authRouter)
 server.use(categoryRouter)
 server.use(notesRouter)
-
-server.listen(process.env.PORT,()=>{
-    console.log(`Running on port ` + process.env.PORT + ` vocês são picas`)
+server.get('/', ()=>{console.log("I'M WORKING")})
+server.listen(PORT_IN_USE,()=>{
+    console.log(`Running on port ` + PORT_IN_USE )
 });
